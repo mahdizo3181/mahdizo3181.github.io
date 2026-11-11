@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mahdi Zolfaghari, backend developer</title>
+<meta name="description" content="Mahdi Zolfaghari is a backend developer in Tehran working with Python, Django, DRF, PostgreSQL, Redis, Celery and Docker.">
+<meta property="og:title" content="Mahdi Zolfaghari, backend developer">
+<meta property="og:description" content="Python and Django backend developer in Tehran. Open the terminal and look around.">
+<link rel="canonical" href="https://mahdizolfaghari.ir/">
+<meta property="og:url" content="https://mahdizolfaghari.ir/">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12'/%3E%3Cpath d='M14 20l14 12-14 12' fill='none' stroke='%2300ff41' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M32 46h18' stroke='%2300ff41' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Mahdi Zolfaghari","url":"https://mahdizolfaghari.ir/","jobTitle":"Backend developer",
+ "address":{"@type":"PostalAddress","addressLocality":"Tehran","addressCountry":"IR"},
+ "knowsAbout":["Python","Django","Django REST Framework","PostgreSQL","MongoDB","Redis","Celery","Docker"],
+ "sameAs":["https://github.com/mahdizo3181","https://t.me/mahdiz_o"]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Fira+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g:0 255 65;            /* accent as channels, for translucent borders and glows */
+  --green:#00ff41;
+  --moss:#00a62b;
+  --lime:#86ffa6;
+  --ink:#c6d4ca;           /* body text is a calm grey-green; green is kept for accents */
+  --hi:#f2fff5;
+  --dim:#66836f;
+  --amber:#ffcf5c;
+  --red:#ff5f5f;
+  --glow:.14;
+  --night:#000;
+  --glass:rgba(4,8,5,.94);
+  --line:rgb(var(--g) / .2);
+  --mono:"Fira Code","JetBrains Mono","Cascadia Code",ui-monospace,Menlo,Consolas,monospace;
+  --sans:"Fira Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --panel-h:38px;
+  --dock-h:72px;
+}
+[data-theme="matrix"]{--ink:#9dffb5;--hi:#e4ffea;--dim:#3f9c58;--glow:.32}
+[data-theme="lime"]{--g:170 255 0;--green:#aaff00;--moss:#6fa800;--lime:#d6ff80;--ink:#cfd6c4;--dim:#7c8667}
+[data-theme="amber"]{--g:255 176 0;--green:#ffb000;--moss:#b37b00;--lime:#ffd37a;--ink:#d9d1c0;--hi:#fff8e8;--dim:#8a7a5c;--amber:#fff1c9}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--night);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:15px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--lime);text-underline-offset:3px}
+a:hover{color:var(--hi)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--lime);outline-offset:2px;border-radius:4px}
+::selection{background:rgb(var(--g) / .45);color:var(--hi)}
+
+/* ---------- wallpaper ---------- */
+.wallpaper{position:fixed;inset:0;z-index:0;overflow:hidden;background:radial-gradient(70vw 60vh at 50% 40%,rgb(var(--g) / .09),transparent 70%),#000}
+.wallpaper canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.2}
+.wallpaper::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 35%,#000 100%)}
+/* CRT scanlines over everything, and a little phosphor glow on text */
+body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;background:repeating-linear-gradient(rgba(0,0,0,0) 0 2px,rgba(0,0,0,.09) 2px 3px)}
+.body,.bar .title,.chips,#bootlog,#greeter{text-shadow:0 0 8px rgb(var(--g) / var(--glow))}
+
+/* ---------- top panel ---------- */
+.panel{
+  position:fixed;top:0;left:0;right:0;height:var(--panel-h);z-index:50;
+  display:flex;align-items:center;gap:6px;padding:0 12px;
+  background:rgba(0,5,1,.78);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  font-size:13.5px;
+}
+.panel .who{
+  display:flex;align-items:center;gap:8px;font-weight:600;margin-right:10px;white-space:nowrap;
+}
+.panel .who i{
+  width:12px;height:12px;transform:rotate(45deg);border-radius:2px;
+  background:linear-gradient(135deg,var(--green),var(--lime));
+}
+.panel nav{display:flex;gap:2px}
+.panel nav button{padding:4px 10px;border-radius:6px;color:var(--dim)}
+.panel nav button:hover{background:rgba(255,255,255,.08);color:var(--ink)}
+.panel .tray{margin-left:auto;display:flex;gap:14px;align-items:center;color:var(--dim);font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+.panel .tray b{color:var(--ink);font-weight:500}
+.panel .tray button{font:inherit;color:var(--green);padding:1px 9px;border:1px solid var(--line);border-radius:6px}
+.panel .tray button:hover{border-color:var(--green)}
+
+/* ---------- desktop + windows ---------- */
+.desktop{
+  position:relative;z-index:1;max-width:calc(1080px + 6vw);margin:0 auto;
+  padding:calc(var(--panel-h) + 22px) 3vw calc(var(--dock-h) + 48px);
+  display:grid;gap:22px;align-items:start;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-areas:"term term" "career career" "stack skills" "contact contact";
+}
+.win{
+  position:relative;display:flex;flex-direction:column;min-width:0;scroll-margin-top:calc(var(--panel-h) + 18px);
+  background:var(--glass);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:1px solid var(--line);
+  border-radius:12px;
+  box-shadow:0 24px 60px rgba(0,0,0,.55),0 0 0 1px rgba(0,0,0,.35);
+  overflow:hidden;
+}
+.win.focus,.win:focus-within{border-color:rgb(var(--g) / .5);box-shadow:0 28px 70px rgba(0,0,0,.65),0 0 34px rgb(var(--g) / .16)}
+.win[hidden]{display:none}
+/* the terminal is the whole first screen; everything else is one scroll below it */
+#w-term{
+  grid-area:term;width:100%;
+  height:calc(100vh - var(--panel-h) - var(--dock-h) - 44px);
+  height:calc(100dvh - var(--panel-h) - var(--dock-h) - 44px);
+  min-height:420px;margin-bottom:var(--dock-h);
+}
+#w-career{grid-area:career}
+#w-stack{grid-area:stack;align-self:stretch}
+#w-skills{grid-area:skills;align-self:stretch}
+#w-contact{grid-area:contact}
+.contact{padding:26px 22px 30px}
+.contact h2{margin:10px 0 8px;font:700 clamp(1.15rem,2.6vw,1.7rem)/1.3 var(--mono);color:var(--hi);max-width:34ch}
+.contact p{margin:0;max-width:64ch}
+.contact .cta{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0 18px}
+.contact .cta a{padding:9px 20px;border:1px solid var(--green);border-radius:8px;color:var(--green);text-decoration:none;font-weight:500}
+.contact .cta a:first-child,.contact .cta a:hover{background:var(--green);color:#000;text-shadow:none}
+.contact .cta a:first-child:hover{background:var(--hi);border-color:var(--hi)}
+.contact .or{color:var(--dim)}
+.contact .or button{font-family:var(--mono);color:var(--lime);text-decoration:underline;text-underline-offset:3px}
+#progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--green);transform-origin:left;transform:scaleX(0);box-shadow:0 0 8px var(--green)}
+#in::placeholder{color:var(--dim);opacity:.75}
+.win:not(#w-term) .body{overflow:visible}
+.contact .cta [hidden]{display:none}
+
+.bar{
+  flex:none;display:flex;align-items:center;height:36px;padding:0 10px 0 14px;
+  background:rgba(0,3,1,.6);border-bottom:1px solid var(--line);
+  font-size:13px;color:var(--dim);user-select:none;
+}
+.bar .title{flex:1;font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.win.focus .bar .title{color:var(--ink)}
+.bar .ctl{display:flex;gap:8px}
+.bar .ctl i{width:13px;height:13px;border-radius:50%;opacity:.85}
+.ctl i:nth-child(1){background:var(--amber)}
+.ctl i:nth-child(2){background:var(--green)}
+.ctl i:nth-child(3){background:var(--red)}
+
+.body{flex:1;overflow:auto;padding:16px 18px;font-family:var(--mono);font-size:13.5px;line-height:1.65;scrollbar-width:thin;scrollbar-color:rgb(var(--g) / .5) transparent}
+
+/* ---------- terminal ---------- */
+#term{cursor:text;padding-bottom:8px}
+#out > div{white-space:pre-wrap;word-break:break-word}
+.ps1{color:var(--dim);margin-top:10px}
+.ps1 .u{color:var(--lime)} .ps1 .h{color:var(--green)} .ps1 .d{color:var(--moss)}
+.ps2{display:flex;align-items:center;color:var(--dim)}
+.ps2 .lam{color:var(--green);margin:0 .6ch 0 0}
+.cmd{color:var(--hi)}
+#in{
+  flex:1;min-width:0;background:none;border:0;outline:0;padding:0;
+  font:inherit;color:var(--hi);caret-color:var(--lime);
+}
+.k{color:var(--lime)} .m{color:var(--green)} .v{color:var(--moss)} .y{color:var(--amber)} .r{color:var(--red)} .d{color:var(--dim)} .w{color:var(--hi);font-weight:500}
+.fetch{display:flex;gap:28px;flex-wrap:wrap;align-items:center;margin:6px 0 4px}
+.fetch pre{
+  margin:0;font:inherit;line-height:1.15;font-weight:700;
+  background:linear-gradient(120deg,var(--green),var(--moss) 50%,var(--lime));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.fetch .info{white-space:pre-wrap}
+.sw{display:inline-block;width:2.6ch;height:1.1em;vertical-align:middle}
+.job{margin:8px 0 14px}
+.job ul{margin:4px 0 0;padding-left:2.2ch}
+.job li::marker{color:var(--green);content:"▸ "}
+.chips{
+  flex:none;display:flex;gap:6px;flex-wrap:wrap;padding:10px 14px;
+  border-top:1px solid var(--line);background:rgba(0,3,1,.45);
+}
+.chips button{
+  font-family:var(--mono);font-size:12.5px;padding:4px 11px;border-radius:999px;
+  border:1px solid var(--line);color:var(--ink);
+}
+.chips button:hover{border-color:var(--lime);color:var(--lime)}
+
+/* ---------- career log + packages ---------- */
+.shell-line{color:var(--dim);margin:0 0 12px}
+.shell-line b{color:var(--green);font-weight:500}
+.entry{position:relative;margin:0;padding:0 0 18px 30px}
+.entry::before{content:"";position:absolute;left:6px;top:8px;bottom:-8px;width:2px;background:var(--moss);opacity:.6}
+.entry::after{content:"";position:absolute;left:0;top:4px;width:14px;height:14px;box-sizing:border-box;border-radius:50%;
+  border:2px solid var(--green);background:#000}
+.entry.now::after{background:var(--green);animation:ping 2s ease-out infinite}
+.entry.edu::after{border-radius:3px;transform:rotate(45deg) scale(.85)}
+.entry:last-child::before{display:none}
+@keyframes ping{from{box-shadow:0 0 0 0 rgb(var(--g) / .7)}to{box-shadow:0 0 0 10px rgb(var(--g) / 0)}}
+.ref{font-style:normal;font-size:11px;margin-left:10px;padding:1px 8px;border:1px solid var(--green);border-radius:4px;color:var(--green);white-space:nowrap}
+.entry h2{margin:0;font:500 14px/1.5 var(--mono);color:var(--hi)}
+.sec{margin:6px 0 16px;font:500 12.5px var(--mono);color:var(--dim)}
+.entry h2 span{color:var(--lime)}
+.entry time{display:block;color:var(--amber);font-size:12.5px}
+.entry p{margin:4px 0 0;color:var(--dim)}
+.entry ul{margin:6px 0 0;padding-left:2.2ch}
+.entry li{margin:2px 0}
+.entry li::marker{color:var(--green);content:"▸ "}
+.entry li b{color:var(--hi);font-weight:500}
+.pk{display:grid;grid-template-columns:max-content 1fr;gap:1px 2ch;margin:0}
+.pk dt{white-space:nowrap}
+.pk dt i{font-style:normal;color:var(--moss)}
+.pk dt b{font-weight:500;color:var(--hi)}
+.pk dd{margin:0;color:var(--dim)}
+
+/* ---------- live stack diagram ---------- */
+.flow{display:block;width:100%;max-width:480px;height:auto;margin:0 auto}
+.flow .box{fill:rgb(var(--g) / .12);stroke:var(--moss);stroke-width:1.2}
+.flow .box.hot{fill:rgb(var(--g) / .14);stroke:var(--green)}
+.flow .ship{fill:none;stroke:var(--dim);stroke-width:1;stroke-dasharray:5 5}
+.flow text{font:500 13.5px var(--mono);fill:var(--ink);text-anchor:middle;dominant-baseline:central}
+.flow text.s{font-size:11px;fill:var(--dim)}
+.flow .wire{fill:none;stroke:rgb(var(--g) / .35);stroke-width:1.2}
+.flow .p1{fill:var(--green)} .flow .p2{fill:var(--lime)} .flow .p3{fill:var(--amber)}
+.flow .hot{animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{fill:rgb(var(--g) / .3)}}
+#log{margin:8px 0 0;min-height:4.95em;font-size:11.5px;white-space:pre;overflow:hidden;color:var(--dim)}
+.sim{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--dim);font-size:12px;margin:12px 0 0}
+.send{margin-left:auto;padding:3px 12px;border:1px solid var(--green);border-radius:6px;color:var(--green);font:500 12.5px var(--mono)}
+.send:hover:not(:disabled){background:var(--green);color:#000;text-shadow:none}
+.send:disabled{opacity:.5;cursor:default}
+.flow .mine{fill:var(--hi);filter:drop-shadow(0 0 5px var(--green))}
+.you{color:var(--hi)}
+.tagh{margin:0 0 6px;font:500 12.5px var(--mono);color:var(--dim)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;padding:0;list-style:none}
+.tags.soft li{border-color:rgb(var(--g) / .3);color:var(--lime)}
+.tags li{padding:1px 9px;color:var(--green);border:1px solid var(--line);border-radius:6px;font-size:12.5px}
+
+/* ---------- matrix ---------- */
+.matrix{position:absolute;left:0;right:0;top:36px;bottom:0;z-index:5;cursor:pointer}
+
+/* ---------- boot + greeter ---------- */
+#intro{position:fixed;inset:0;z-index:100;background:#000;display:grid;place-items:center;transition:opacity .4s;cursor:pointer}
+#intro[hidden],#intro [hidden]{display:none}
+#intro.out{opacity:0;pointer-events:none}
+#bootlog{position:absolute;left:22px;top:18px;right:22px;margin:0;font:13px/1.75 var(--mono);color:var(--dim);white-space:pre-wrap}
+#bootlog .ok{color:var(--lime)}
+#greeter{text-align:center;padding:20px}
+#greeter .avatar{width:96px;height:96px;margin:0 auto 22px;border-radius:50%;display:grid;place-items:center;
+  font:700 32px var(--mono);color:#000;background:linear-gradient(135deg,var(--green),var(--moss) 55%,var(--lime));
+  box-shadow:0 0 60px rgb(var(--g) / .35)}
+#greeter h1{margin:0;font:700 clamp(1.5rem,5.4vw,3.3rem)/1.15 var(--mono);color:var(--green)}
+#greeter p{margin:10px 0 28px;color:var(--dim);font-size:1.05rem}
+#greeter .login{font:13px var(--mono);color:var(--dim)}
+#greeter .login i{display:block;width:230px;height:4px;margin:10px auto 0;border-radius:2px;background:rgba(255,255,255,.12);overflow:hidden}
+#greeter .login b{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--lime));transform-origin:left;animation:fill 2.2s linear both}
+@keyframes fill{from{transform:scaleX(0)}}
+#intro .skip{position:absolute;bottom:22px;left:0;right:0;text-align:center;margin:0;font:12.5px var(--mono);color:var(--dim)}
+.win.pop{animation:pop .5s cubic-bezier(.2,.9,.3,1.15) both}
+@keyframes pop{from{opacity:0;transform:scale(.92) translateY(14px)}}
+
+/* ---------- dock ---------- */
+.dock{
+  position:fixed;z-index:50;left:50%;bottom:10px;transform:translateX(-50%);
+  display:flex;gap:6px;padding:7px 9px;
+  background:rgba(0,5,1,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--line);border-radius:16px;
+}
+.dock a,.dock button{
+  position:relative;display:grid;place-items:center;gap:1px;
+  min-width:62px;padding:6px 8px 9px;border-radius:11px;text-decoration:none;
+  font-size:11.5px;color:var(--dim);
+}
+.dock a:hover,.dock button:hover{background:rgba(255,255,255,.08);color:var(--ink)}
+.dock .ic{font:700 17px/1.2 var(--mono);color:var(--ink)}
+.dock [data-win].open::after{
+  content:"";position:absolute;bottom:3px;left:50%;width:14px;height:3px;margin-left:-7px;border-radius:2px;
+  background:linear-gradient(90deg,var(--green),var(--lime));
+}
+.dock [hidden]{display:none}
+.fetch{row-gap:12px}
+.dock .sep{width:1px;background:var(--line);margin:6px 3px}
+
+noscript section{position:relative;z-index:2;max-width:68ch;margin:60px auto;padding:24px;background:var(--glass);border-radius:12px}
+
+/* ---------- small screens: windows stack and the page scrolls ---------- */
+@media (max-width:899px){
+  .desktop{padding:calc(var(--panel-h) + 12px) 10px calc(var(--dock-h) + 26px);gap:12px;
+    grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"term" "career" "stack" "skills" "contact"}
+  #w-term{height:76vh;height:76dvh;margin-bottom:0}
+  .panel nav,.tray .hide-s{display:none}
+  .body{font-size:12.5px;padding:14px}
+  .fetch pre{font-size:11px}
+  .dock{left:10px;right:10px;transform:none;justify-content:space-around;gap:0}
+  .dock a,.dock button{min-width:0;padding:6px 3px 9px;font-size:10.5px}
+  .dock .sep{display:none}
+  #in{font-size:16px} /* stops iOS zoom on focus */
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important;scroll-behavior:auto !important}}
+</style>
+</head>
+<body>
+
+<div id="intro" hidden>
+  <pre id="bootlog" aria-hidden="true"></pre>
+  <div id="greeter" hidden>
+    <div class="avatar" aria-hidden="true">MZ</div>
+    <h1 aria-label="Mahdi Zolfaghari">Mahdi Zolfaghari</h1>
+    <p>Backend developer in Tehran</p>
+    <div class="login">Authenticating guest<i><b></b></i></div>
+  </div>
+  <p class="skip">Tap or press any key to skip</p>
+</div>
+
+<div class="wallpaper" aria-hidden="true"><canvas id="rain"></canvas></div>
+
+<header class="panel">
+  <div class="who"><i aria-hidden="true"></i>Mahdi Zolfaghari</div>
+  <nav aria-label="Sections">
+    <button data-run="about">About</button>
+    <button data-run="experience">Experience</button>
+    <button data-run="skills">Skills</button>
+    <button data-run="education">Education</button>
+    <button data-run="contact">Contact</button>
+  </nav>
+  <div class="tray">
+    <button id="theme" class="hide-s" type="button" title="Switch colour theme">theme: phosphor</button>
+    <span>Tehran <b id="clock">--:--</b></span>
+  </div>
+  <div id="progress" aria-hidden="true"></div>
+</header>
+
+<main class="desktop" id="desktop">
+
+  <section class="win focus" id="w-term" aria-label="Terminal">
+    <div class="bar">
+      <span class="title">mahdi@garuda: ~ (fish)</span>
+      <span class="ctl" aria-hidden="true"><i></i><i></i><i></i></span>
+    </div>
+    <div class="body" id="term">
+      <div id="out" aria-live="polite"></div>
+      <div class="ps1">╭─<span class="u">mahdi</span>@<span class="h">garuda</span> in <span class="d">~</span></div>
+      <label class="ps2">╰─<span class="lam">λ</span><input id="in" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Terminal command"></label>
+    </div>
+    <div class="chips" aria-label="Run a command">
+      <button data-run="about">about</button>
+      <button data-run="experience">experience</button>
+      <button data-run="skills">skills</button>
+      <button data-run="education">education</button>
+      <button data-run="contact">contact</button>
+      <button data-run="curl /api/">api</button>
+      <button data-run="python manage.py migrate">migrate</button>
+      <button data-run="help">help</button>
+    </div>
+  </section>
+
+  <section class="win" id="w-career" aria-label="Career log">
+    <div class="bar">
+      <span class="title">git log --graph career</span>
+      <span class="ctl" aria-hidden="true"><i></i><i></i><i></i></span>
+    </div>
+    <div class="body">
+      <article class="entry now">
+        <h2>Backend mentor <span>@ Maktab Sharif</span><i class="ref">HEAD, still running</i></h2>
+        <time>Nov 2022 to present</time>
+        <p>Programming mentor on the backend track, with students from their first lessons until they ship real-world projects.</p>
+        <ul>
+          <li><b>Guidance.</b> Accompany students through the whole learning journey and keep them moving.</li>
+          <li><b>Code review.</b> Read their code and give structured feedback they can act on.</li>
+          <li><b>Unblocking.</b> Resolve the technical challenges they get stuck on.</li>
+          <li><b>Curriculum.</b> Contribute to designing the learning paths.</li>
+          <li><b>Quality.</b> Help raise the standard of the students' final projects.</li>
+        </ul>
+      </article>
+      <article class="entry">
+        <h2>Backend developer <span>@ Kateb</span></h2>
+        <time>Oct 2024 to Feb 2026</time>
+        <p>Maintained and extended an existing product, from cleaning up legacy code to building new systems.</p>
+        <ul>
+          <li><b>Legacy code.</b> Refactored and optimised several parts of the codebase for readability, performance and maintainability.</li>
+          <li><b>Integrations.</b> Implemented and managed the connections to Moodle and BigBlueButton.</li>
+          <li><b>File management.</b> Designed and built one unified file system with chunk upload for large files, and tightened upload security.</li>
+          <li><b>Product system.</b> Redesigned the product infrastructure so every section of the project can be sold independently.</li>
+          <li><b>Pricing.</b> Implemented several discount and promotion mechanisms.</li>
+          <li><b>More features.</b> A ticketing system, a financial system, and integrations with several payment gateways.</li>
+        </ul>
+      </article>
+      <article class="entry">
+        <h2>Backend developer <span>@ Salon 20</span></h2>
+        <time>Jun 2023 to Sep 2024</time>
+        <p>A startup offering appointment booking to a wide range of businesses.</p>
+        <ul>
+          <li><b>Services.</b> Developed and maintained the backend services behind the booking product.</li>
+          <li><b>Features.</b> Designed and implemented new ones from start to finish.</li>
+          <li><b>Performance.</b> Improved how fast the system responds.</li>
+          <li><b>Infrastructure.</b> Took an active part in infrastructure maintenance and server management.</li>
+          <li><b>Stability.</b> Worked on keeping the system reliably up.</li>
+        </ul>
+      </article>
+      <h3 class="sec">── education ──</h3>
+      <article class="entry edu">
+        <h2>MSc, Computer Engineering <span>@ Islamic Azad University of Hamadan</span></h2>
+        <time>2026</time>
+      </article>
+      <article class="entry edu">
+        <h2>BSc, Computer Science <span>@ Kermanshah University of Technology</span></h2>
+        <time>2020 to 2024</time>
+      </article>
+    </div>
+  </section>
+
+  <section class="win" id="w-stack" aria-label="Live stack diagram">
+    <div class="bar">
+      <span class="title">stack.live</span>
+      <span class="ctl" aria-hidden="true"><i></i><i></i><i></i></span>
+    </div>
+    <div class="body">
+      <svg class="flow" id="flow" viewBox="0 0 430 200" role="img" aria-label="The stack I work with: a client sends JWT-authenticated requests to Django and DRF, which talk to PostgreSQL, MongoDB and Redis, with Celery workers fed from Redis, all running in Docker.">
+        <rect class="ship" x="104" y="6" width="320" height="188" rx="10"/>
+        <text class="s" x="134" y="20">docker</text>
+        <path id="e1" class="wire" d="M76 82H122"/>
+        <path id="e2" class="wire" d="M226 74 296 37"/>
+        <path id="e3" class="wire" d="M226 82H296"/>
+        <path id="e4" class="wire" d="M226 92 296 160"/>
+        <path id="e5" class="wire" d="M296 167H226"/>
+        <rect class="box" x="6" y="64" width="70" height="36" rx="8"/><text x="41" y="82">client</text>
+        <text class="s" x="89" y="70">JWT</text>
+        <rect class="box hot" x="122" y="58" width="104" height="48" rx="8"/><text x="174" y="75">django</text><text class="s" x="174" y="92">+ drf</text>
+        <rect class="box" x="296" y="18" width="120" height="34" rx="8"/><text x="356" y="35">postgresql</text>
+        <rect class="box" x="296" y="65" width="120" height="34" rx="8"/><text x="356" y="82">mongodb</text>
+        <rect class="box" x="296" y="150" width="120" height="34" rx="8"/><text x="356" y="167">redis</text>
+        <rect class="box" x="122" y="150" width="104" height="34" rx="8"/><text x="174" y="167">celery</text>
+        <circle class="p1" r="3.5"><animateMotion dur="1.3s" repeatCount="indefinite"><mpath href="#e1"/></animateMotion></circle>
+        <circle class="p2" r="3"><animateMotion dur="1.7s" begin=".4s" repeatCount="indefinite"><mpath href="#e2"/></animateMotion></circle>
+        <circle class="p2" r="3"><animateMotion dur="2.6s" begin="1s" repeatCount="indefinite"><mpath href="#e3"/></animateMotion></circle>
+        <circle class="p2" r="3"><animateMotion dur="1.9s" begin=".7s" repeatCount="indefinite"><mpath href="#e4"/></animateMotion></circle>
+        <circle class="p3" r="3"><animateMotion dur="2.2s" begin="1.2s" repeatCount="indefinite"><mpath href="#e5"/></animateMotion></circle>
+      </svg>
+      <p class="sim"><span>$ tail -f access.log (simulated)</span><button class="send" id="send" type="button">Send a request</button></p>
+      <div id="log" aria-live="off"></div>
+    </div>
+  </section>
+
+  <section class="win" id="w-skills" aria-label="Skills">
+    <div class="bar">
+      <span class="title">pacman -Qe</span>
+      <span class="ctl" aria-hidden="true"><i></i><i></i><i></i></span>
+    </div>
+    <div class="body">
+      <h3 class="tagh">Technical</h3>
+      <ul class="tags">
+        <li>Python</li><li>Django</li><li>DRF</li><li>RESTful API</li><li>OOP</li><li>PostgreSQL</li><li>MongoDB</li>
+        <li>Redis</li><li>Celery</li><li>Docker</li><li>JWT</li><li>Git</li><li>Linux</li><li>Unit tests</li>
+      </ul>
+      <h3 class="tagh">Soft skills</h3>
+      <ul class="tags soft">
+        <li>Mentoring</li><li>Teamwork</li><li>Creativity</li><li>Leadership</li><li>Adaptability</li>
+      </ul>
+      <h3 class="tagh">Language</h3>
+      <ul class="tags"><li>English</li></ul>
+    </div>
+  </section>
+  <section class="win" id="w-contact" aria-label="Contact">
+    <div class="bar">
+      <span class="title">ssh mahdi@work</span>
+      <span class="ctl" aria-hidden="true"><i></i><i></i><i></i></span>
+    </div>
+    <div class="body contact">
+      <div class="d">$ ssh mahdi@work</div>
+      <h2>Have a backend to build, or a legacy codebase to rescue?</h2>
+      <p>I work with Django, DRF, PostgreSQL, Redis, Celery and Docker. Send me a message and tell me what you are building.</p>
+      <div class="cta">
+        <a id="c-mail" href="#">Send an email</a>
+        <a id="c-tg" href="#" hidden>Message me on Telegram</a>
+      </div>
+      <p class="or">Or do it the backend way: <button type="button" data-run="curl -X POST /api/hire">curl -X POST /api/hire</button></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="dock" aria-label="Dock">
+  <button data-win="w-term" class="open"><span class="ic">&gt;_</span>Terminal</button>
+  <button data-win="w-career" class="open"><span class="ic">≡</span>Career</button>
+  <button data-win="w-stack" class="open"><span class="ic">⇄</span>Stack</button>
+  <button data-win="w-skills" class="open"><span class="ic">⬡</span>Skills</button>
+  <span class="sep" aria-hidden="true"></span>
+  <a id="dock-mail" href="#"><span class="ic">@</span>Email</a>
+  <a id="dock-tg" href="#" hidden><span class="ic">➤</span>Telegram</a>
+  <a id="dock-gh" href="#" hidden><span class="ic">{}</span>GitHub</a>
+</footer>
+
+<noscript>
+  <section>
+    <h1>Mahdi Zolfaghari, backend developer</h1>
+    <p>Python and Django developer in Tehran, building for the web since 2021. This page is an interactive terminal and needs JavaScript; the windows above still list my experience and skills.</p>
+  </section>
+</noscript>
+
+<script>
+/* ====== Edit these ====== */
+const CONFIG = {
+  email: "mahdizolfaghari3181@gmail.com",
+  github: "mahdizo3181",
+  linkedin: "",   // your LinkedIn handle (the part after linkedin.com/in/)
+  telegram: "mahdiz_o"   // Telegram username, without @
+};
+/* ======================== */
+
+const $ = s => document.querySelector(s);
+const out = $("#out"), input = $("#in"), term = $("#term");
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const wide = matchMedia("(min-width: 900px)");
+const years = Math.max(1, new Date().getFullYear() - 2021);
+
+/* ---------- colour themes ---------- */
+const THEMES = ["phosphor", "matrix", "lime", "amber"];   // the first one is the default
+let ACCENT = "#00ff41", HI = "#f2fff5", theme = THEMES[0];
+function setTheme(name, save) {
+  if (!THEMES.includes(name)) return false;
+  theme = name;
+  document.documentElement.dataset.theme = name;
+  const cs = getComputedStyle(document.documentElement);
+  ACCENT = cs.getPropertyValue("--green").trim(); HI = cs.getPropertyValue("--hi").trim();
+  $("#theme").textContent = "theme: " + name;
+  if (save) { try { localStorage.setItem("mz-theme", name); } catch (e) {} }
+  return true;
+}
+(() => { let t = null; try { t = localStorage.getItem("mz-theme"); } catch (e) {} setTheme(THEMES.includes(t) ? t : THEMES[0]); })();
+$("#theme").addEventListener("click", () => setTheme(THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length], true));
+
+const links = [];
+links.push(["email", `<a href="mailto:${CONFIG.email}">${CONFIG.email}</a>`]);
+if (CONFIG.github)   links.push(["github",   `<a href="https://github.com/${CONFIG.github}" target="_blank" rel="noopener">github.com/${CONFIG.github}</a>`]);
+if (CONFIG.linkedin) links.push(["linkedin", `<a href="https://www.linkedin.com/in/${CONFIG.linkedin}" target="_blank" rel="noopener">linkedin.com/in/${CONFIG.linkedin}</a>`]);
+if (CONFIG.telegram) links.push(["telegram", `<a href="https://t.me/${CONFIG.telegram}" target="_blank" rel="noopener">t.me/${CONFIG.telegram}</a>`]);
+
+$("#dock-mail").href = $("#c-mail").href = "mailto:" + CONFIG.email;
+if (CONFIG.telegram) [$("#dock-tg"), $("#c-tg")].forEach(t => { t.hidden = false; t.href = "https://t.me/" + CONFIG.telegram; t.target = "_blank"; t.rel = "noopener"; });
+if (CONFIG.github) { const g = $("#dock-gh"); g.hidden = false; g.href = "https://github.com/" + CONFIG.github; g.target = "_blank"; g.rel = "noopener"; }
+
+/* ---------- content ---------- */
+const row = (k, v) => `<span class="m">${k.padEnd(9)}</span> ${v}`;
+const ABOUT = `<span class="w">Mahdi Zolfaghari</span>, backend developer in Tehran.
+
+I started building for the web in 2021 and went deep on Django.
+I like creative fixes for hard problems, code that the next person
+can read, and learning something new on every project.
+
+Besides shipping features I mentor new backend developers,
+which keeps my own fundamentals honest.`;
+
+/* Experience is read from the career window, so there is one place to edit it. */
+const JOBS = [...document.querySelectorAll("#w-career .entry:not(.edu)")].map(e => ({
+  role: e.querySelector("h2").firstChild.textContent.trim(),
+  company: e.querySelector("h2 span").textContent.replace("@", "").trim(),
+  period: e.querySelector("time").textContent.trim(),
+  summary: e.querySelector("p").textContent.trim(),
+  highlights: [...e.querySelectorAll("li")].map(li => li.textContent.replace(/\s+/g, " ").trim())
+}));
+const EXPERIENCE = JOBS.map(j =>
+  `<div class="job"><span class="w">${j.role}</span> <span class="k">@ ${j.company}</span>  <span class="y">${j.period}</span>\n<span class="d">${j.summary}</span><ul>${j.highlights.map(i => `<li>${i}</li>`).join("")}</ul></div>`).join("");
+
+const SKILLS = [
+  row("lang", "Python, OOP"),
+  row("web", "Django, DRF, RESTful API, JWT"),
+  row("data", "PostgreSQL, MongoDB, Redis"),
+  row("ops", "Docker, Celery, Linux, Git"),
+  row("testing", "Unit tests"),
+  row("soft", "Mentoring, teamwork, creativity, leadership, adaptability"),
+  row("language", "English")
+].join("\n");
+
+const EDUCATION = `<span class="w">MSc, Computer Engineering</span>  <span class="y">2026</span>
+<span class="d">Islamic Azad University of Hamadan</span>
+
+<span class="w">BSc, Computer Science</span>  <span class="y">2020 to 2024</span>
+<span class="d">Kermanshah University of Technology</span>`;
+
+const CONTACT = () => links.map(([k, v]) => row(k, v)).join("\n") + `\n${row("location", "Tehran, Iran")}`;
+
+const FETCH = () => `<div class="fetch"><pre aria-hidden="true">███╗   ███╗███████╗
+████╗ ████║╚══███╔╝
+██╔████╔██║  ███╔╝
+██║╚██╔╝██║ ███╔╝
+██║ ╚═╝ ██║███████╗
+╚═╝     ╚═╝╚══════╝</pre><div class="info"><span class="k">mahdi</span>@<span class="m">garuda</span>
+<span class="d">────────────────────</span>
+${row("Name", "Mahdi Zolfaghari")}
+${row("Role", "Backend developer")}
+${row("Now", "Mentoring at Maktab Sharif")}
+${row("OS", "Garuda Linux x86_64")}
+${row("Shell", "fish")}
+${row("Uptime", years + " years on the web (since 2021)")}
+${row("Stack", "Python, Django, DRF")}
+${row("Data", "PostgreSQL, MongoDB, Redis")}
+${row("Ops", "Docker, Celery, Git")}
+${row("Location", "Tehran")}
+
+${["green", "moss", "lime", "amber", "red", "ink"].map(c => `<span class="sw" style="background:var(--${c})"></span>`).join("")}</div></div>`;
+
+const HELP = `Commands
+  <span class="k">about</span>        who I am
+  <span class="k">experience</span>   where I have worked
+  <span class="k">skills</span>       what I work with
+  <span class="k">education</span>    degrees
+  <span class="k">contact</span>      how to reach me
+  <span class="k">fastfetch</span>    the summary card
+  <span class="k">ls</span>, <span class="k">cat</span>      read the files in this folder
+  <span class="k">clear</span>        clean the screen
+
+My résumé is also a REST API
+  <span class="k">curl /api/</span>                lists the endpoints
+  <span class="k">curl /api/experience</span>      or skills, education, contact, me
+  <span class="k">curl -X POST /api/hire</span>    the one write endpoint
+For fun
+  <span class="k">python manage.py migrate</span>  my career, as migrations
+  <span class="k">python manage.py test</span>     does he deliver?
+  <span class="k">theme</span>                     change the colours
+  <span class="k">/</span>                         jump back to this terminal from anywhere
+  <span class="k">docker ps</span>, <span class="k">matrix</span>, <span class="k">chai</span>
+
+<span class="d">Tab completes, ↑ and ↓ walk through history.</span>`;
+
+const FILES = {
+  "about.txt": () => ABOUT,
+  "experience.log": () => EXPERIENCE,
+  "skills.txt": () => SKILLS,
+  "education.txt": () => EDUCATION,
+  "contact.txt": CONTACT
+};
+
+/* ---------- the résumé as a small REST API ---------- */
+const json = o => JSON.stringify(o, null, 2).replace(/("(?:[^"\\]|\\.)*")(\s*:)?|\b(\d+)\b/g,
+  (m, str, colon, num) => str ? (colon ? `<span class="m">${str}</span>:` : `<span class="k">${str}</span>`) : `<span class="y">${num}</span>`);
+const RESOURCES = {
+  "": () => ({ me: "/api/me", skills: "/api/skills", experience: "/api/experience", education: "/api/education", contact: "/api/contact", hire: "POST /api/hire" }),
+  me: () => ({ name: "Mahdi Zolfaghari", role: "Backend developer", now: "Mentoring at Maktab Sharif", location: "Tehran", web_developer_since: 2021 }),
+  skills: () => ({
+    technical: ["Python", "Django", "DRF", "RESTful API", "OOP", "PostgreSQL", "MongoDB", "Redis", "Celery", "Docker", "JWT", "Git", "Linux", "Unit tests"],
+    soft: ["Mentoring", "Teamwork", "Creativity", "Leadership", "Adaptability"],
+    languages: ["English"] }),
+  experience: () => JOBS,
+  education: () => [
+    { degree: "MSc, Computer Engineering", school: "Islamic Azad University of Hamadan", year: 2026 },
+    { degree: "BSc, Computer Science", school: "Kermanshah University of Technology", years: "2020 to 2024" }],
+  contact: () => {
+    const c = { email: CONFIG.email, location: "Tehran, Iran" };
+    if (CONFIG.github) c.github = "https://github.com/" + CONFIG.github;
+    if (CONFIG.linkedin) c.linkedin = "https://www.linkedin.com/in/" + CONFIG.linkedin;
+    if (CONFIG.telegram) c.telegram = "https://t.me/" + CONFIG.telegram;
+    return c;
+  }
+};
+const STATUS = { 200: "OK", 201: "Created", 404: "Not Found", 405: "Method Not Allowed" };
+function api(method, path) {
+  const name = path.replace(/^https?:\/\/[^/]+/, "").replace(/^\/?api\/?(v1\/)?/, "").replace(/\/$/, "");
+  let code = 200, body;
+  if (name === "hire") {
+    if (method === "POST") { code = 201; body = { detail: "Good call. The next step is an email.", email: CONFIG.email }; }
+    else { code = 405; body = { detail: `Method "${method}" not allowed.`, hint: "Try POST." }; }
+  }
+  else if (!(name in RESOURCES)) { code = 404; body = { detail: "Not found.", hint: "GET /api/ lists every endpoint." }; }
+  else if (method !== "GET") { code = 405; body = { detail: `Method "${method}" not allowed.`, hint: "My history is read-only." }; }
+  else body = RESOURCES[name]();
+  return `<span class="d">HTTP/1.1</span> <span class="${code < 300 ? "k" : "r"}">${code} ${STATUS[code]}</span>\n<span class="d">Content-Type: application/json</span>\n\n${json(body)}`
+    + (code === 201 ? `\n\n<a href="mailto:${CONFIG.email}?subject=Let%27s%20talk">Write that email now</a>` : "");
+}
+
+const MIGRATE = [
+  `<span class="w">Operations to perform:</span>`, `  Apply all migrations: career`, `<span class="w">Running migrations:</span>`,
+  ...["0001_bsc_computer_science_2020", "0002_entered_web_development_2021", "0003_mentor_at_maktab_sharif_2022",
+      "0004_backend_at_salon_20_2023", "0005_backend_at_kateb_2024", "0006_msc_computer_engineering_2026"]
+    .map(m => `  Applying career.${m}... <span class="k">OK</span>`),
+  `<span class="d">The next migration is yours to write:</span> <span class="k">curl -X POST /api/hire</span>`];
+const TESTS = [
+  `Found 6 test(s).`, `System check identified no issues (0 silenced).`,
+  ...["test_refactors_legacy_code", "test_uploads_large_files_in_chunks", "test_integrates_moodle_and_bigbluebutton",
+      "test_connects_payment_gateways", "test_keeps_servers_stable", "test_mentors_new_developers"]
+    .map(t => `${t} ... <span class="k">ok</span>`),
+  `<span class="d">----------------------------------------------------------------------</span>`,
+  `Ran 6 tests in ${years} years`, `<span class="k">OK</span>`];
+
+const DOCKER = () => [
+  ["NAME", "IMAGE", "STATUS"],
+  ["api", "django + drf", `Up ${years} years (healthy)`],
+  ["db", "postgresql", "Up"],
+  ["documents", "mongodb", "Up"],
+  ["cache", "redis", "Up"],
+  ["worker", "celery", "Up, waiting for tasks"],
+  ["mentor", "maktab-sharif", "Up since Nov 2022 (still running)"]
+].map((r, i) => {
+  const line = r[0].padEnd(11) + r[1].padEnd(16) + r[2];
+  return i ? line.replace(/Up/, '<span class="k">Up</span>') : `<span class="d">${line}</span>`;
+}).join("\n");
+
+const CHAI = `<span class="y">    ( (
+     ) )
+  .________.
+  |        |]
+  \\        /
+   \`------'</span>
+Chai is ready. <span class="d">Back to work.</span>`;
+
+/* ---------- commands ---------- */
+const COMMANDS = {
+  help: () => HELP,
+  about: () => ABOUT, whoami: () => ABOUT,
+  experience: () => EXPERIENCE, work: () => EXPERIENCE,
+  skills: () => SKILLS,
+  education: () => EDUCATION,
+  contact: CONTACT,
+  fastfetch: FETCH, neofetch: FETCH,
+  ls: () => Object.keys(FILES).map(f => `<span class="k">${f}</span>`).join("  "),
+  pwd: () => "/home/mahdi",
+  date: () => new Date().toString(),
+  history: () => hist.map((h, i) => `${String(i + 1).padStart(3)}  ${esc(h)}`).join("\n"),
+  clear: () => { out.innerHTML = ""; return null; },
+  exit: () => `<span class="d">There is no logout from a portfolio. Try</span> <span class="k">contact</span> <span class="d">instead.</span>`
+};
+const COMPLETIONS = ["help", "about", "experience", "skills", "education", "contact", "fastfetch", "ls", "cat ", "curl /api/", "curl /api/me", "curl /api/skills", "curl /api/experience", "curl /api/education", "curl /api/contact", "curl -X POST /api/hire", "python manage.py migrate", "python manage.py test", "theme ", ...THEMES.map(t => "theme " + t), "clear", "matrix", "docker ps", "chai", "history", "pwd", "date", "whoami", ...Object.keys(FILES).map(f => "cat " + f)];
+
+function esc(s) { return s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+
+function evaluate(raw) {
+  const line = raw.trim();
+  if (!line) return "";
+  const [cmd, ...args] = line.split(/\s+/);
+  const rest = args.join(" ");
+
+  if (COMMANDS[cmd] && cmd !== "ls") return COMMANDS[cmd]();
+  if (cmd === "ls") return COMMANDS.ls();
+  if (cmd === "cat") {
+    if (!rest) return `<span class="r">cat: which file?</span> Run <span class="k">ls</span> to see them.`;
+    const f = FILES[rest.replace(/^\.\//, "")];
+    return f ? f() : `<span class="r">cat: ${esc(rest)}: No such file.</span> Run <span class="k">ls</span> to see what is here.`;
+  }
+  if (cmd === "echo") return esc(rest);
+  if (cmd === "theme") {
+    if (!rest) return `Current theme is <span class="k">${theme}</span>. Pick one: ${THEMES.map(t => `<span class="k">theme ${t}</span>`).join(", ")}`;
+    return setTheme(rest, true) ? `Theme set to <span class="k">${rest}</span>.` : `<span class="r">No theme called ${esc(rest)}.</span> Available: ${THEMES.join(", ")}`;
+  }
+  if (cmd === "matrix" || cmd === "cmatrix") { startMatrix(); return null; }
+  if (cmd === "docker") return /^ps/.test(rest) ? DOCKER() : `Only <span class="k">docker ps</span> is wired up here.`;
+  if (cmd === "chai" || cmd === "tea" || cmd === "coffee") return CHAI;
+  if (cmd === "curl" || cmd === "http") {
+    const m = (args.find(a => /^(GET|POST|PUT|PATCH|DELETE)$/i.test(a)) || "GET").toUpperCase();
+    const p = args.find(a => a.includes("/"));
+    return p ? api(m, p) : `Usage: <span class="k">curl /api/</span> lists every endpoint.`;
+  }
+  if (/^python3?$/.test(cmd) && /manage\.py\s+migrate/.test(rest)) { stream(MIGRATE, 240); return null; }
+  if (/^python3?$/.test(cmd) && /manage\.py\s+test/.test(rest)) { stream(TESTS, 200); return null; }
+  if (/^python3?$/.test(cmd) && /manage\.py\s*$/.test(rest)) return `Subcommands: <span class="k">migrate</span>, <span class="k">test</span>, <span class="k">runserver</span>`;
+  if (cmd === "sudo") return `[sudo] password for mahdi: \n<span class="r">Sorry, try again.</span> <span class="d">Guests do not get root here.</span>`;
+  if (cmd === "pacman" || cmd === "garuda-update" || cmd === "paru" || cmd === "yay")
+    return `<span class="w">:: Synchronising skill databases...</span>\n lang, web, data and ops are up to date\n<span class="k">there is nothing to do</span> <span class="d">(until the next project)</span>`;
+  if (/^python3?$/.test(cmd) && /manage\.py\s+runserver/.test(rest))
+    return `Watching for file changes with StatReloader\nSystem check identified no issues (0 silenced).\nStarting development server at <span class="k">http://127.0.0.1:8000/</span>\n<span class="d">Just kidding. The real ones run behind gunicorn.</span>`;
+  if (cmd === "rm") return `<span class="r">rm: permission denied.</span> <span class="d">This portfolio is mounted read-only.</span>`;
+  if (cmd === "cd") return `<span class="d">Everything worth seeing is already in ~</span>`;
+  if (["vim", "nvim", "nano"].includes(cmd)) return `<span class="d">No editor needed here. Nothing to fix.</span>`;
+
+  return `<span class="r">fish: Unknown command: ${esc(cmd)}</span>\nRun <span class="k">help</span> to see what works here.`;
+}
+
+/* ---------- terminal plumbing ---------- */
+const hist = []; let hi = 0;
+
+function print(html) {
+  const d = document.createElement("div");
+  d.innerHTML = html;
+  out.appendChild(d);
+}
+function echoPrompt(text) {
+  print(`<div class="ps1">╭─<span class="u">mahdi</span>@<span class="h">garuda</span> in <span class="d">~</span></div><div>╰─<span class="lam m">λ</span> <span class="cmd">${esc(text)}</span></div>`);
+}
+function run(text) {
+  echoPrompt(text);
+  if (text.trim()) { hist.push(text.trim()); hi = hist.length; }
+  const res = evaluate(text);
+  if (res) print(res);
+  term.scrollTop = term.scrollHeight;
+}
+
+input.addEventListener("keydown", e => {
+  if (e.key === "Enter") { run(input.value); input.value = ""; }
+  else if (e.key === "ArrowUp") { if (hi > 0) { input.value = hist[--hi]; e.preventDefault(); } }
+  else if (e.key === "ArrowDown") { hi = Math.min(hist.length, hi + 1); input.value = hist[hi] || ""; e.preventDefault(); }
+  else if (e.key === "Tab") {
+    const v = input.value;
+    if (!v) return;                       // let Tab leave the terminal when empty
+    e.preventDefault();
+    const hits = COMPLETIONS.filter(c => c.startsWith(v) && c !== v);
+    if (hits.length === 1) input.value = hits[0];
+    else if (hits.length > 1) { echoPrompt(v); print(hits.map(h => `<span class="k">${h.trim()}</span>`).join("   ")); term.scrollTop = term.scrollHeight; }
+  }
+  else if (e.key === "l" && e.ctrlKey) { e.preventDefault(); out.innerHTML = ""; }
+});
+term.addEventListener("click", () => { if (!String(getSelection())) input.focus({ preventScroll: true }); });
+
+document.querySelectorAll("[data-run]").forEach(b => b.addEventListener("click", () => {
+  const w = $("#w-term");
+  focusWin(w);
+  run(b.dataset.run);
+  w.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+}));
+
+/* print lines one by one, like a real command working */
+function stream(lines, gap) {
+  if (reduced) { lines.forEach(print); return; }
+  input.disabled = true;
+  let i = 0;
+  const t = setInterval(() => {
+    print(lines[i++]); term.scrollTop = term.scrollHeight;
+    if (i === lines.length) { clearInterval(t); input.disabled = false; if (wide.matches) input.focus({ preventScroll: true }); }
+  }, gap);
+}
+
+/* ---------- code rain: wallpaper, and the matrix command ---------- */
+function rain(c, { fs = 15, fade = .14, gap = 50 } = {}) {
+  const ctx = c.getContext("2d"), chars = "MAHDI01{}<>/=+*λ";
+  let drops = [];
+  const reset = () => {
+    drops = Array.from({ length: Math.ceil(c.width / fs) }, () => -Math.floor(Math.random() * 40));
+    ctx.fillStyle = "#000"; ctx.fillRect(0, 0, c.width, c.height); ctx.font = fs + "px monospace";
+  };
+  reset();
+  const t = setInterval(() => {
+    if (document.hidden) return;
+    ctx.fillStyle = `rgba(0,0,0,${fade})`; ctx.fillRect(0, 0, c.width, c.height);
+    drops.forEach((y, i) => {
+      ctx.fillStyle = Math.random() > .97 ? HI : ACCENT;
+      ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * fs, y * fs);
+      drops[i] = y * fs > c.height && Math.random() > .95 ? 0 : y + 1;
+    });
+  }, gap);
+  return { stop: () => clearInterval(t), reset };
+}
+(function wallpaper() {
+  if (reduced) return;
+  const c = $("#rain"), size = () => { c.width = innerWidth; c.height = innerHeight; };
+  size();
+  const r = rain(c, { fs: 16, fade: .07, gap: 75 });
+  let t; addEventListener("resize", () => { clearTimeout(t); t = setTimeout(() => { size(); r.reset(); }, 200); });
+})();
+function startMatrix() {
+  if (reduced) { print(`<span class="d">Skipped, because your system asks for reduced motion.</span>`); return; }
+  const w = $("#w-term"), c = document.createElement("canvas");
+  c.className = "matrix"; c.width = w.clientWidth; c.height = w.clientHeight - 36;
+  w.appendChild(c);
+  const r = rain(c);
+  let auto;
+  const stop = () => { r.stop(); clearTimeout(auto); c.remove(); document.removeEventListener("keydown", stop, true); };
+  setTimeout(() => { document.addEventListener("keydown", stop, true); c.addEventListener("click", stop); }, 250);
+  auto = setTimeout(stop, 9000);
+  print(`<span class="d">Any key or a tap stops the rain.</span>`);
+}
+
+/* ---------- stack diagram: simulated log, plus requests the visitor sends ---------- */
+(function stack() {
+  const el = $("#log"), svg = $("#flow"), btn = $("#send"), NS = "http://www.w3.org/2000/svg";
+  // method, path, status, and the wires the request travels along
+  const ROUTES = [
+    ["POST", "/api/v1/files/chunks/", 201, ["e1", "e3"]],
+    ["GET", "/api/v1/products/", 200, ["e1", "e2"]],
+    ["POST", "/api/v1/discounts/apply/", 200, ["e1", "e2"]],
+    ["GET", "/api/v1/tickets/", 200, ["e1", "e4"]],
+    ["POST", "/api/v1/payments/verify/", 200, ["e1", "e2"]],
+    ["POST", "/api/v1/appointments/", 201, ["e1", "e4", "e5"]],
+    ["POST", "/api/v1/token/refresh/", 200, ["e1", "e4"]],
+    ["GET", "/api/v1/courses/", 200, ["e1", "e2"]]];
+  const pick = () => ROUTES[Math.floor(Math.random() * ROUTES.length)];
+  const lines = [];
+  const add = ([m, p, c], mine) => {
+    const ms = 8 + Math.floor(Math.random() * 70);
+    lines.push(`<span class="${mine ? "you" : ""}"><span class="m">${m.padEnd(4)}</span> ${p.padEnd(25)} <span class="k">${c}</span> ${String(ms).padStart(2)}ms</span>`);
+    if (lines.length > 3) lines.shift();
+    el.innerHTML = lines.join("\n");
+  };
+  const travel = (ids, done) => {
+    const dot = document.createElementNS(NS, "circle");
+    dot.setAttribute("r", 5.5); dot.setAttribute("class", "mine"); svg.appendChild(dot);
+    let k = 0;
+    const leg = () => {
+      const p = svg.querySelector("#" + ids[k]), L = p.getTotalLength(), t0 = performance.now();
+      const frame = now => {
+        const t = Math.min(1, (now - t0) / 430), pt = p.getPointAtLength(L * t);
+        dot.setAttribute("cx", pt.x); dot.setAttribute("cy", pt.y);
+        if (t < 1) requestAnimationFrame(frame);
+        else if (++k < ids.length) leg();
+        else { dot.remove(); done(); }
+      };
+      requestAnimationFrame(frame);
+    };
+    leg();
+  };
+  btn.addEventListener("click", () => {
+    const r = pick();
+    if (reduced) return add(r, true);
+    btn.disabled = true;
+    travel(r[3], () => { add(r, true); btn.disabled = false; });
+  });
+  add(pick()); add(pick()); add(pick());
+  if (reduced) { svg.pauseAnimations(); return; }
+  setInterval(() => { if (!document.hidden) add(pick()); }, 1700);
+})();
+
+/* type fastfetch once, then hand over */
+function typeBoot() {
+  const cmd = "fastfetch";
+  const done = () => {
+    input.value = ""; run(cmd);
+    print(`\nI build and maintain Django backends, and I mentor new backend developers at Maktab Sharif.\n<span class="d">Run</span> <span class="k">help</span><span class="d">, use the buttons under this terminal, or scroll down for my career, stack and skills.</span>`);
+    if (wide.matches) input.focus({ preventScroll: true });
+  };
+  if (reduced) return done();
+  let i = 0;
+  const t = setInterval(() => {
+    input.value = cmd.slice(0, ++i);
+    if (i === cmd.length) { clearInterval(t); setTimeout(done, 280); }
+  }, 85);
+}
+
+/* ---------- window manager ---------- */
+const wins = [...document.querySelectorAll(".win")];
+function focusWin(w) { wins.forEach(x => x.classList.toggle("focus", x === w)); }
+wins.forEach(w => {
+  w.addEventListener("pointerdown", () => focusWin(w));
+  w.addEventListener("animationend", () => w.classList.remove("pop"));
+});
+/* dock: jump to a window, and mark the ones currently on screen */
+document.querySelectorAll("[data-win]").forEach(b => b.addEventListener("click", () => {
+  const w = document.getElementById(b.dataset.win);
+  focusWin(w);
+  w.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+}));
+const onScreen = new IntersectionObserver(es => es.forEach(e => {
+  const b = document.querySelector(`[data-win="${e.target.id}"]`);
+  if (b) b.classList.toggle("open", e.isIntersecting);
+  // windows below the fold open as you reach them, once
+  if (e.isIntersecting && !e.target.dataset.seen) { e.target.dataset.seen = 1; if (e.target.id !== "w-term") e.target.classList.add("pop"); }
+}), { threshold: .12 });
+
+/* scroll progress under the top bar */
+(() => {
+  const bar = $("#progress"); let queued = false;
+  const paint = () => { queued = false; const max = document.documentElement.scrollHeight - innerHeight; bar.style.transform = `scaleX(${max > 0 ? Math.min(1, scrollY / max) : 0})`; };
+  addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(paint); } }, { passive: true });
+})();
+
+/* "/" jumps to the terminal from anywhere on the page */
+document.addEventListener("keydown", e => {
+  if (e.key !== "/" || e.target === input || e.ctrlKey || e.metaKey) return;
+  e.preventDefault();
+  $("#w-term").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+  input.focus({ preventScroll: true });
+});
+
+/* rotating suggestions in the empty prompt */
+(() => {
+  const tips = ["try: experience", "try: curl /api/skills", "try: python manage.py migrate", "try: docker ps", "try: theme", "try: curl -X POST /api/hire"];
+  let i = 0; input.placeholder = tips[0];
+  setInterval(() => { input.placeholder = tips[++i % tips.length]; }, 3500);
+})();
+
+/* ---------- boot log, greeter, then the desktop ---------- */
+function startDesktop() {
+  $("#w-term").classList.add("pop");
+  wins.forEach(w => onScreen.observe(w));
+  setTimeout(typeBoot, reduced ? 0 : 450);
+}
+function scramble(el) {
+  const final = el.textContent, pool = "01<>/{}#$%&*";
+  let n = 0;
+  const t = setInterval(() => {
+    n++;
+    el.textContent = [...final].map((ch, i) => i < n || ch === " " ? ch : pool[Math.floor(Math.random() * pool.length)]).join("");
+    if (n >= final.length) clearInterval(t);
+  }, 55);
+}
+(function intro() {
+  let seen = false;
+  try { seen = sessionStorage.getItem("mz-intro") === "1"; } catch (e) {}
+  if (reduced || seen) return startDesktop();
+  const el = $("#intro"), log = $("#bootlog"), timers = [];
+  const ok = t => `[  <span class="ok">OK</span>  ] ${t}`;
+  const LINES = [":: running early hook [udev]", ":: mounting /home/mahdi",
+    ok("Started PostgreSQL database server."), ok("Started Redis in-memory data store."),
+    ok("Started Celery worker pool."), ok("Started Docker container engine."),
+    ok("Reached target Django REST API."), ok(`Loaded ${years} years of backend experience.`),
+    ok("Started portfolio.service.")];
+  let finished = false;
+  const finish = () => {
+    if (finished) return; finished = true;
+    timers.forEach(clearTimeout);
+    try { sessionStorage.setItem("mz-intro", "1"); } catch (e) {}
+    document.removeEventListener("keydown", finish);
+    el.classList.add("out"); setTimeout(() => { el.hidden = true; }, 420);
+    startDesktop();
+  };
+  el.hidden = false;
+  document.addEventListener("keydown", finish);
+  el.addEventListener("click", finish);
+  LINES.forEach((l, i) => timers.push(setTimeout(() => { log.innerHTML += l + "\n"; }, 130 * i)));
+  const t1 = 130 * LINES.length + 380;
+  timers.push(setTimeout(() => { log.hidden = true; $("#greeter").hidden = false; scramble($("#greeter h1")); }, t1));
+  timers.push(setTimeout(finish, t1 + 2300));
+})();
+
+/* ---------- clock (Tehran time) ---------- */
+const fmt = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Tehran", hour: "2-digit", minute: "2-digit" });
+const tick = () => { $("#clock").textContent = fmt.format(new Date()); };
+tick(); setInterval(tick, 20000);
+</script>
+</body>
+</html>

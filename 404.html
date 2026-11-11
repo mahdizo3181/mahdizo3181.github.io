@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404, page not found</title>
+<style>
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#000;color:#c6d4ca;
+  font:15px/1.7 "Fira Code",ui-monospace,Menlo,Consolas,monospace}
+main{width:min(92vw,640px);padding:22px 24px;border:1px solid rgba(0,255,65,.25);border-radius:12px;background:#040805}
+pre{margin:0;white-space:pre-wrap;word-break:break-word;font:inherit}
+.g{color:#00ff41}.r{color:#ff5f5f}.d{color:#66836f}
+a{display:inline-block;margin-top:18px;padding:5px 14px;border:1px solid #00ff41;border-radius:6px;color:#00ff41;text-decoration:none}
+a:hover,a:focus-visible{background:#00ff41;color:#000;outline:0}
+</style>
+</head>
+<body>
+<main>
+<pre><span class="d">╭─</span><span class="g">mahdi@garuda</span><span class="d"> in ~
+╰─</span><span class="g">λ</span> curl <span id="p">/that/page</span>
+<span class="d">HTTP/1.1</span> <span class="r">404 Not Found</span>
+<span class="d">Content-Type: application/json</span>
+
+{
+  <span class="g">"detail"</span>: "Not found.",
+  <span class="g">"hint"</span>: "This page does not exist. The desktop does."
+}</pre>
+<a href="/">Back to the desktop</a>
+</main>
+<script>document.getElementById("p").textContent = location.pathname;</script>
+</body>
+</html>
